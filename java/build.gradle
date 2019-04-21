@@ -1,0 +1,44 @@
+apply plugin: 'idea'
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+def javaVersion = JavaVersion.VERSION_1_8;
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+dependencies {
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.2'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.2'
+
+    // https://mvnrepository.com/artifact/io.projectreactor/reactor-core
+    compile group: 'io.projectreactor', name: 'reactor-core', version: '3.2.8.RELEASE'
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+
+    annotationProcessor("org.projectlombok:lombok:1.18.4")
+    compileOnly "org.projectlombok:lombok:1.18.4"
+
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.4")
+    testCompileOnly "org.projectlombok:lombok:1.18.4"
+
+    // https://mvnrepository.com/artifact/commons-cli/commons-cli
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.2'
+
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'Application'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
