@@ -5,7 +5,9 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
+import java.math.BigDecimal;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @Log4j2
 public class Application {
@@ -22,8 +24,9 @@ public class Application {
             int precision = Integer.parseInt(getOptionValue(commandLine, OptionCode.PRECISION));
             int numReps = Integer.parseInt(getOptionValue(commandLine, OptionCode.NUM_REPS));
             boolean silent = hasOption(commandLine, OptionCode.SILENT);
+            String outputPath = new String(getOptionValue(commandLine, OptionCode.OUTPUT));
 
-            Timer timer = createTimer(mode, numThreads, precision, numReps);
+            Timer timer = createTimer(mode, numThreads, precision, numReps, outputPath);
             double avgTime = timer.time(silent).stream().mapToDouble(d -> d).average().getAsDouble();
 
             log.info("Computing pi with precision={} took {} ms on avg for {} calls with params mode={}, num_threads={}",
@@ -31,25 +34,29 @@ public class Application {
         });
     }
 
-    private Timer createTimer(String mode, int numThreads, int precision, int numReps) {
+    private Timer createTimer(String mode, int numThreads, int precision, int numReps, String outputPath) {
         Timer timer;
+
+        Consumer<ComputeStrategy> compute = (strategy) -> {
+            BigDecimal pi = strategy.compute(precision);
+            strategy.onComplete();
+            PiFileWriter.writeToFile(pi, outputPath);
+        };
+
         if ("single".equals(mode)) {
             timer = new Timer(numReps, () -> {
                 ComputeStrategy strategy = Pi.single();
-                strategy.compute(precision);
-                strategy.onComplete();
+                compute.accept(strategy);
             });
         } else if ("shared".equals(mode)) {
             timer = new Timer(numReps, () -> {
                 ComputeStrategy strategy = Pi.commonForkJoin();
-                strategy.compute(precision);
-                strategy.onComplete();
+                compute.accept(strategy);
             });
         } else {
             timer = new Timer(numReps, () -> {
                 ComputeStrategy strategy = Pi.parallel(numThreads);
-                strategy.compute(precision);
-                strategy.onComplete();
+                compute.accept(strategy);
             });
         }
 
@@ -96,7 +103,7 @@ public class Application {
         NUM_THREADS("num_threads", String.valueOf(Runtime.getRuntime().availableProcessors())),
         PRECISION("precision", "2"),
         SILENT("silent", "false"),
-        OUTPUT("ouput", "tmp.pi"),
+        OUTPUT("ouput", "./pi.tmp"),
         NUM_REPS("num_reps", "1");
 
         String key;
