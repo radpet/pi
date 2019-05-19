@@ -17,14 +17,14 @@ public class Application {
         this.args = args;
     }
 
-    void run() {
+    private void run() {
         parseCommandLine().ifPresent(commandLine -> {
             String mode = getOptionValue(commandLine, OptionCode.MODE);
-            int numThreads = Integer.parseInt(getOptionValue(commandLine, OptionCode.NUM_THREADS));
+            int numThreads = "single".equals(mode) ? 1 : Integer.parseInt(getOptionValue(commandLine, OptionCode.NUM_THREADS));
             int precision = Integer.parseInt(getOptionValue(commandLine, OptionCode.PRECISION));
             int numReps = Integer.parseInt(getOptionValue(commandLine, OptionCode.NUM_REPS));
             boolean silent = hasOption(commandLine, OptionCode.SILENT);
-            String outputPath = new String(getOptionValue(commandLine, OptionCode.OUTPUT));
+            String outputPath = getOptionValue(commandLine, OptionCode.OUTPUT);
 
             Timer timer = createTimer(mode, numThreads, precision, numReps, outputPath);
             double avgTime = timer.time(silent).stream().mapToDouble(d -> d).average().getAsDouble();
