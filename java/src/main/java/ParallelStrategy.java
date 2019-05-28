@@ -30,7 +30,7 @@ public class ParallelStrategy extends ComputeStrategy {
 
     private Callable<BigDecimal> computePi(int precision) {
         return () ->
-                IntStream.range(0, precision / 5 + 1)
+                IntStream.range(0, MathUtils.calculateIterations(precision))
                         .parallel()
                         .mapToObj(i -> computeMember(i, precision + 2))
                         .reduce(BigDecimal.ZERO, (current, sumSoFar) -> sumSoFar.add(current));

@@ -8,4 +8,8 @@ class MathUtils {
                 .mapToObj(BigInteger::valueOf)
                 .reduce(BigInteger.ONE, (current, factSoFar) -> factSoFar.multiply(current));
     }
+
+    static int calculateIterations(int precision){
+        return precision / 5 + 1;
+    }
 }

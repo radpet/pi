@@ -1,15 +1,22 @@
-22:12:38.027 [main] INFO  Application - Computing pi with precision=10000 took 1208454.6048996665 ms on avg for 3 calls with params mode=single, num_threads=1
+Starting a Gradle Daemon, 1 incompatible Daemon could not be reused, use --status for details
+
+> Task :compileJava
+
+BUILD SUCCESSFUL in 6s
+3 actionable tasks: 2 executed, 1 up-to-date
+Starting pi-bench
+21:32:07.350 [main] INFO  Application - Computing pi with precision=10000 took 12346.108364999998 ms on avg for 3 calls with params mode=single, num_threads=1
 #######
-22:12:53.306 [main] INFO  Application - Computing pi with precision=10000 took 4794.876504 ms on avg for 3 calls with params mode=shared, num_threads=12
+21:32:22.933 [main] INFO  Application - Computing pi with precision=10000 took 5006.027775 ms on avg for 3 calls with params mode=shared, num_threads=12
 #######
-22:13:09.221 [main] INFO  Application - Computing pi with precision=10000 took 5057.509851999999 ms on avg for 3 calls with params mode=parallel, num_threads=4
+21:32:39.044 [main] INFO  Application - Computing pi with precision=10000 took 5164.121512999999 ms on avg for 3 calls with params mode=parallel, num_threads=4
 #######
-22:13:24.556 [main] INFO  Application - Computing pi with precision=10000 took 4865.096186666667 ms on avg for 3 calls with params mode=parallel, num_threads=6
+21:32:54.943 [main] INFO  Application - Computing pi with precision=10000 took 5077.221840333333 ms on avg for 3 calls with params mode=parallel, num_threads=6
 #######
-22:13:39.744 [main] INFO  Application - Computing pi with precision=10000 took 4817.150956666666 ms on avg for 3 calls with params mode=parallel, num_threads=8
+21:33:12.427 [main] INFO  Application - Computing pi with precision=10000 took 5615.377549666667 ms on avg for 3 calls with params mode=parallel, num_threads=8
 #######
-22:13:54.916 [main] INFO  Application - Computing pi with precision=10000 took 4824.165375 ms on avg for 3 calls with params mode=parallel, num_threads=12
+21:33:27.920 [main] INFO  Application - Computing pi with precision=10000 took 4935.631063 ms on avg for 3 calls with params mode=parallel, num_threads=12
 #######
-22:14:10.003 [main] INFO  Application - Computing pi with precision=10000 took 4800.669972666667 ms on avg for 3 calls with params mode=parallel, num_threads=16
+21:33:45.167 [main] INFO  Application - Computing pi with precision=10000 took 5550.276923 ms on avg for 3 calls with params mode=parallel, num_threads=16
 #######
-22:14:25.257 [main] INFO  Application - Computing pi with precision=10000 took 4863.341622 ms on avg for 3 calls with params mode=parallel, num_threads=18
+21:34:01.447 [main] INFO  Application - Computing pi with precision=10000 took 5232.194348666667 ms on avg for 3 calls with params mode=parallel, num_threads=18

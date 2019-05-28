@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 class ForkJoinStrategy extends ComputeStrategy {
     @Override
     protected BigDecimal strategy(int precision) {
-        return IntStream.range(0, precision / 5 + 1)
+        return IntStream.range(0, MathUtils.calculateIterations(precision))
                 .parallel()
                 .mapToObj(i -> computeMember(i, precision + 2))
                 .reduce(BigDecimal.ZERO, (current, sumSoFar) -> sumSoFar.add(current));
