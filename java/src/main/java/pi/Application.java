@@ -43,7 +43,7 @@ public class Application {
             strategy.onComplete();
             PiFileWriter.writeToFile(pi, outputPath);
         };
-        if ("single".equals("mode") && "cached".equals(factMode)) {
+        if ("single".equals(mode) && "cached".equals(factMode)) {
             timer = new Timer(numReps, () -> {
                 FactorialCache factorialCache = FactorialCache.of(precision);
                 ComputeStrategy strategy = Pi.singleCached(factorialCache);

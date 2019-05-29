@@ -5,10 +5,12 @@ import pi.MathUtils;
 import pi.factorial.FactorialSupplier;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Log4j2
@@ -20,27 +22,34 @@ public class ParallelStrategy extends ComputeStrategy {
     public ParallelStrategy(int numThreads, FactorialSupplier factorialSupplier) {
         this.numThreads = numThreads;
         this.factorialSupplier = factorialSupplier;
-        executor = Executors.newFixedThreadPool(numThreads);
+        executor = new ForkJoinPool(numThreads);
     }
 
     @Override
     protected BigDecimal strategy(int precision) {
         try {
-            return executor.submit(computePi(precision)).get();
-        } catch (InterruptedException | ExecutionException e) {
+            return executor.invokeAll(computePi(precision))
+                    .stream()
+                    .map(f -> {
+                        try {
+                            return f.get();
+                        } catch (InterruptedException | ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                        return BigDecimal.ZERO;
+                    })
+                    .reduce(BigDecimal.ZERO, (current, sumSoFar) -> sumSoFar.add(current));
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
         executor.shutdown();
         return BigDecimal.ZERO;
     }
 
-    private Callable<BigDecimal> computePi(int precision) {
-        return () ->
-                IntStream.range(0, MathUtils.calculateIterations(precision))
-                        .parallel()
-                        .mapToObj(i -> computeMember(i, precision + 2, factorialSupplier))
-                        .reduce(BigDecimal.ZERO, (current, sumSoFar) -> sumSoFar.add(current));
-
+    private List<Callable<BigDecimal>> computePi(int precision) {
+        return IntStream.range(0, MathUtils.calculateIterations(precision))
+                .mapToObj(i -> (Callable<BigDecimal>) () -> computeMember(i, precision + 2, factorialSupplier))
+                .collect(Collectors.toList());
     }
 
     @Override
