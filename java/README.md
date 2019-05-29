@@ -11,3 +11,11 @@ To run it use `run.sh` or `java -jar build/libs/pi-bench-all.jar -mode parallel 
   Total Number of Cores:	6
 
 ```
+
+``` bench_report2.txt based on
+  Processor Name:	Intel® Core™ i5-4690 CPU
+  Processor Speed:	3.50GHz
+  Number of Processors:	1
+  Total Number of Cores:	4
+
+```
