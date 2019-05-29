@@ -23,6 +23,10 @@ public class Pi {
         return new SingleThreadStrategy(new DummyFactorialSupplier());
     }
 
+    public static ComputeStrategy singleCached(FactorialCache factorialCache) {
+        return new SingleThreadStrategy(factorialCache);
+    }
+
     public static ComputeStrategy commonForkJoin() {
         return new ForkJoinStrategy(new FastFactorialSupplier());
     }

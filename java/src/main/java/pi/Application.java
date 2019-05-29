@@ -1,11 +1,7 @@
 package pi;
 
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.*;
 import pi.factorial.FactorialCache;
 import pi.strategy.ComputeStrategy;
 
@@ -47,8 +43,13 @@ public class Application {
             strategy.onComplete();
             PiFileWriter.writeToFile(pi, outputPath);
         };
-
-        if ("single".equals(mode)) {
+        if ("single".equals("mode") && "cached".equals(factMode)) {
+            timer = new Timer(numReps, () -> {
+                FactorialCache factorialCache = FactorialCache.of(precision);
+                ComputeStrategy strategy = Pi.singleCached(factorialCache);
+                compute.accept(strategy);
+            });
+        } else if ("single".equals(mode)) {
             timer = new Timer(numReps, () -> {
                 ComputeStrategy strategy = Pi.single();
                 compute.accept(strategy);
