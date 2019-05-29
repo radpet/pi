@@ -18,9 +18,9 @@ public class Timer {
         this.runnable = runnable;
     }
 
-    public List<Double> time(boolean silent) {
+    public List<Long> time(boolean silent) {
         return IntStream.range(0, numRep)
-                .mapToDouble(i -> {
+                .mapToLong(i -> {
                     Stopwatch stopwatch = new Stopwatch();
                     stopwatch.start();
                     if (!silent) {
@@ -28,7 +28,7 @@ public class Timer {
                     }
                     runnable.run();
                     stopwatch.stop();
-                    double time = stopwatch.elapsedTime(TimeUnit.NANOSECONDS) * 1e-6;
+                    long time = (long) (stopwatch.elapsedTime(TimeUnit.NANOSECONDS) * 1e-6);
                     if (!silent) {
                         log.info("Run={} took {} ms", () -> i, () -> time);
                     }

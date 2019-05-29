@@ -1,43 +1,40 @@
-
-BUILD SUCCESSFUL in 1s
-3 actionable tasks: 2 executed, 1 up-to-date
 Starting pi-bench
-21:01:30.178 [main] INFO  pi.Application - Computing pi with precision=10000 took 12575.502376999999 ms on avg for 3 calls with params mode=single, num_threads=1, fact_mode=
+21:29:15.778 [main] INFO  pi.Application - Computing pi with precision=10000 took 11839.0 ms on avg for 3 calls with params mode=single, num_threads=1, fact_mode=
 #######
-21:01:39.879 [main] INFO  pi.Application - Computing pi with precision=10000 took 3111.712642666667 ms on avg for 3 calls with params mode=shared, num_threads=4, fact_mode=
+21:29:22.654 [main] INFO  pi.Application - Computing pi with precision=10000 took 2179.6666666666665 ms on avg for 3 calls with params mode=shared, num_threads=4, fact_mode=
 #######
 Parallel threaded factorial
-21:01:48.355 [main] INFO  pi.Application - Computing pi with precision=10000 took 2699.12037 ms on avg for 3 calls with params mode=parallel, num_threads=4, fact_mode=
+21:29:30.159 [main] INFO  pi.Application - Computing pi with precision=10000 took 2389.3333333333335 ms on avg for 3 calls with params mode=parallel, num_threads=4, fact_mode=
 #######
-21:01:56.088 [main] INFO  pi.Application - Computing pi with precision=10000 took 2453.7888436666667 ms on avg for 3 calls with params mode=parallel, num_threads=6, fact_mode=
+21:29:37.357 [main] INFO  pi.Application - Computing pi with precision=10000 took 2282.6666666666665 ms on avg for 3 calls with params mode=parallel, num_threads=6, fact_mode=
 #######
-21:02:04.095 [main] INFO  pi.Application - Computing pi with precision=10000 took 2543.3472556666666 ms on avg for 3 calls with params mode=parallel, num_threads=8, fact_mode=
+21:29:44.304 [main] INFO  pi.Application - Computing pi with precision=10000 took 2200.3333333333335 ms on avg for 3 calls with params mode=parallel, num_threads=8, fact_mode=
 #######
-21:02:11.580 [main] INFO  pi.Application - Computing pi with precision=10000 took 2373.8690309999997 ms on avg for 3 calls with params mode=parallel, num_threads=12, fact_mode=
+21:29:53.191 [main] INFO  pi.Application - Computing pi with precision=10000 took 2833.3333333333335 ms on avg for 3 calls with params mode=parallel, num_threads=12, fact_mode=
 #######
-21:02:20.139 [main] INFO  pi.Application - Computing pi with precision=10000 took 2730.106993 ms on avg for 3 calls with params mode=parallel, num_threads=16, fact_mode=
+21:30:00.061 [main] INFO  pi.Application - Computing pi with precision=10000 took 2176.3333333333335 ms on avg for 3 calls with params mode=parallel, num_threads=16, fact_mode=
 #######
-21:02:28.610 [main] INFO  pi.Application - Computing pi with precision=10000 took 2692.301964333333 ms on avg for 3 calls with params mode=parallel, num_threads=18, fact_mode=
+21:30:06.837 [main] INFO  pi.Application - Computing pi with precision=10000 took 2142.6666666666665 ms on avg for 3 calls with params mode=parallel, num_threads=18, fact_mode=
 #######
-21:02:36.095 [main] INFO  pi.Application - Computing pi with precision=10000 took 2375.586803333333 ms on avg for 3 calls with params mode=parallel, num_threads=20, fact_mode=
+21:30:15.380 [main] INFO  pi.Application - Computing pi with precision=10000 took 2735.3333333333335 ms on avg for 3 calls with params mode=parallel, num_threads=20, fact_mode=
 #######
-21:02:43.250 [main] INFO  pi.Application - Computing pi with precision=10000 took 2264.3136523333333 ms on avg for 3 calls with params mode=parallel, num_threads=32, fact_mode=
+21:30:21.557 [main] INFO  pi.Application - Computing pi with precision=10000 took 1941.6666666666667 ms on avg for 3 calls with params mode=parallel, num_threads=32, fact_mode=
 #######
-Parallel cached factorial
-21:03:20.177 [main] INFO  pi.Application - Computing pi with precision=10000 took 12183.095478333335 ms on avg for 3 calls with params mode=single, num_threads=1, fact_mode=cached
+Cached factorial
+21:30:56.669 [main] INFO  pi.Application - Computing pi with precision=10000 took 11586.333333333334 ms on avg for 3 calls with params mode=single, num_threads=1, fact_mode=cached
 #######
-21:03:26.331 [main] INFO  pi.Application - Computing pi with precision=10000 took 1927.8873996666669 ms on avg for 3 calls with params mode=parallel, num_threads=4, fact_mode=cached
+21:31:02.095 [main] INFO  pi.Application - Computing pi with precision=10000 took 1673.0 ms on avg for 3 calls with params mode=parallel, num_threads=4, fact_mode=cached
 #######
-21:03:32.555 [main] INFO  pi.Application - Computing pi with precision=10000 took 1947.0175843333334 ms on avg for 3 calls with params mode=parallel, num_threads=6, fact_mode=cached
+21:31:07.631 [main] INFO  pi.Application - Computing pi with precision=10000 took 1728.3333333333333 ms on avg for 3 calls with params mode=parallel, num_threads=6, fact_mode=cached
 #######
-21:03:38.429 [main] INFO  pi.Application - Computing pi with precision=10000 took 1834.85142 ms on avg for 3 calls with params mode=parallel, num_threads=8, fact_mode=cached
+21:31:13.290 [main] INFO  pi.Application - Computing pi with precision=10000 took 1769.6666666666667 ms on avg for 3 calls with params mode=parallel, num_threads=8, fact_mode=cached
 #######
-21:03:43.972 [main] INFO  pi.Application - Computing pi with precision=10000 took 1723.38878 ms on avg for 3 calls with params mode=parallel, num_threads=12, fact_mode=cached
+21:31:18.303 [main] INFO  pi.Application - Computing pi with precision=10000 took 1546.3333333333333 ms on avg for 3 calls with params mode=parallel, num_threads=12, fact_mode=cached
 #######
-21:03:49.419 [main] INFO  pi.Application - Computing pi with precision=10000 took 1690.5138046666668 ms on avg for 3 calls with params mode=parallel, num_threads=16, fact_mode=cached
+21:31:23.746 [main] INFO  pi.Application - Computing pi with precision=10000 took 1701.6666666666667 ms on avg for 3 calls with params mode=parallel, num_threads=16, fact_mode=cached
 #######
-21:03:55.322 [main] INFO  pi.Application - Computing pi with precision=10000 took 1845.5874619999997 ms on avg for 3 calls with params mode=parallel, num_threads=18, fact_mode=cached
+21:31:29.062 [main] INFO  pi.Application - Computing pi with precision=10000 took 1658.0 ms on avg for 3 calls with params mode=parallel, num_threads=18, fact_mode=cached
 #######
-21:04:01.596 [main] INFO  pi.Application - Computing pi with precision=10000 took 1964.5306906666665 ms on avg for 3 calls with params mode=parallel, num_threads=20, fact_mode=cached
+21:31:34.457 [main] INFO  pi.Application - Computing pi with precision=10000 took 1681.6666666666667 ms on avg for 3 calls with params mode=parallel, num_threads=20, fact_mode=cached
 #######
-21:04:07.859 [main] INFO  pi.Application - Computing pi with precision=10000 took 1963.5055093333333 ms on avg for 3 calls with params mode=parallel, num_threads=32, fact_mode=cached
+21:31:40.206 [main] INFO  pi.Application - Computing pi with precision=10000 took 1802.3333333333333 ms on avg for 3 calls with params mode=parallel, num_threads=32, fact_mode=cached

@@ -28,7 +28,7 @@ public class Application {
             String factMode = getOptionValue(commandLine, OptionCode.FACT_MODE);
 
             Timer timer = createTimer(mode, numThreads, precision, numReps, outputPath, factMode);
-            double avgTime = timer.time(silent).stream().mapToDouble(d -> d).average().getAsDouble();
+            double avgTime = timer.time(silent).stream().mapToLong(l -> l).average().getAsDouble();
 
             log.info("Computing pi with precision={} took {} ms on avg for {} calls with params mode={}, num_threads={}, fact_mode={}",
                     () -> precision, () -> avgTime, () -> numReps, () -> mode, () -> numThreads, () -> factMode);
