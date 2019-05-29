@@ -1,6 +1,10 @@
+package pi;
+
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import pi.strategy.ComputeStrategy;
+import pi.strategy.ParallelStrategy;
 
 import java.io.IOException;
 import java.math.BigDecimal;

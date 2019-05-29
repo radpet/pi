@@ -1,5 +1,7 @@
+package pi;
+
 public class SingleThreadStrategyTest extends BaseStrategyTests {
     SingleThreadStrategyTest() {
-        super(SingleThreadStrategy::new);
+        super(Pi::single);
     }
 }

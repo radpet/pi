@@ -1,3 +1,6 @@
+package pi.strategy;
+
+import pi.factorial.FactorialSupplier;
 import lombok.extern.log4j.Log4j2;
 
 import java.math.BigDecimal;
@@ -5,7 +8,7 @@ import java.math.BigInteger;
 import java.math.RoundingMode;
 
 @Log4j2
-abstract class ComputeStrategy {
+public abstract class ComputeStrategy {
     protected abstract BigDecimal strategy(int precision);
 
     public BigDecimal compute(int precision) {
@@ -17,15 +20,15 @@ abstract class ComputeStrategy {
         return new BigDecimal(3528).divide(membersSum, scale, BigDecimal.ROUND_HALF_UP);
     }
 
-    static BigDecimal computeMember(int n, int scale, boolean parallel) {
+    static BigDecimal computeMember(int n, int scale, FactorialSupplier factorialSupplier) {
         // compute (-1)^n*(4*n)! / (4^n*n!)^4
         int sign = n % 2 == 0 ? 1 : -1;
         BigDecimal a = new BigDecimal(
                 BigInteger.valueOf(sign)
-                        .multiply(MathUtils.factorial(4 * n, parallel))
+                        .multiply(factorialSupplier.get(4 * n))
         ).divide(new BigDecimal(
                         BigInteger.valueOf(4).pow(n)
-                                .multiply(MathUtils.factorial(n, parallel)).pow(4)
+                                .multiply(factorialSupplier.get(n)).pow(4)
                 )
                 , scale, RoundingMode.HALF_UP);
 

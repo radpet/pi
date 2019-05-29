@@ -1,9 +1,13 @@
+package pi;
+
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import pi.factorial.FactorialCache;
+import pi.strategy.ComputeStrategy;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -25,16 +29,17 @@ public class Application {
             int numReps = Integer.parseInt(getOptionValue(commandLine, OptionCode.NUM_REPS));
             boolean silent = hasOption(commandLine, OptionCode.SILENT);
             String outputPath = getOptionValue(commandLine, OptionCode.OUTPUT);
+            String factMode = getOptionValue(commandLine, OptionCode.FACT_MODE);
 
-            Timer timer = createTimer(mode, numThreads, precision, numReps, outputPath);
+            Timer timer = createTimer(mode, numThreads, precision, numReps, outputPath, factMode);
             double avgTime = timer.time(silent).stream().mapToDouble(d -> d).average().getAsDouble();
 
-            log.info("Computing pi with precision={} took {} ms on avg for {} calls with params mode={}, num_threads={}",
-                    () -> precision, () -> avgTime, () -> numReps, () -> mode, () -> numThreads);
+            log.info("Computing pi with precision={} took {} ms on avg for {} calls with params mode={}, num_threads={}, fact_mode={}",
+                    () -> precision, () -> avgTime, () -> numReps, () -> mode, () -> numThreads, () -> factMode);
         });
     }
 
-    private Timer createTimer(String mode, int numThreads, int precision, int numReps, String outputPath) {
+    private Timer createTimer(String mode, int numThreads, int precision, int numReps, String outputPath, String factMode) {
         Timer timer;
 
         Consumer<ComputeStrategy> compute = (strategy) -> {
@@ -51,6 +56,12 @@ public class Application {
         } else if ("shared".equals(mode)) {
             timer = new Timer(numReps, () -> {
                 ComputeStrategy strategy = Pi.commonForkJoin();
+                compute.accept(strategy);
+            });
+        } else if ("parallel".equals(mode) && "cached".equals(factMode)) {
+            timer = new Timer(numReps, () -> {
+                FactorialCache factorialCache = FactorialCache.of(precision);
+                ComputeStrategy strategy = Pi.parallelCachedFactorial(numThreads, factorialCache);
                 compute.accept(strategy);
             });
         } else {
@@ -93,6 +104,7 @@ public class Application {
 
         options.addOption(OptionCode.OUTPUT.key, true, "path to output pi file");
         options.addOption(OptionCode.NUM_REPS.key, true, "number of repetions to calculate pi");
+        options.addOption(OptionCode.FACT_MODE.key, true, "way to calculate the factorials");
 
 
         return options;
@@ -104,7 +116,8 @@ public class Application {
         PRECISION("precision", "2"),
         SILENT("silent", "false"),
         OUTPUT("ouput", "./pi.tmp"),
-        NUM_REPS("num_reps", "1");
+        NUM_REPS("num_reps", "1"),
+        FACT_MODE("fact_mode", "");
 
         String key;
         String defaultValue;
