@@ -9,7 +9,7 @@ class ForkJoinStrategy extends ComputeStrategy {
     protected BigDecimal strategy(int precision) {
         return IntStream.range(0, MathUtils.calculateIterations(precision))
                 .parallel()
-                .mapToObj(i -> computeMember(i, precision + 2))
+                .mapToObj(i -> computeMember(i, precision + 2, true))
                 .reduce(BigDecimal.ZERO, (current, sumSoFar) -> sumSoFar.add(current));
     }
 

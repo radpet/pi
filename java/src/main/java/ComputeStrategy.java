@@ -17,15 +17,15 @@ abstract class ComputeStrategy {
         return new BigDecimal(3528).divide(membersSum, scale, BigDecimal.ROUND_HALF_UP);
     }
 
-    static BigDecimal computeMember(int n, int scale) {
+    static BigDecimal computeMember(int n, int scale, boolean parallel) {
         // compute (-1)^n*(4*n)! / (4^n*n!)^4
         int sign = n % 2 == 0 ? 1 : -1;
         BigDecimal a = new BigDecimal(
                 BigInteger.valueOf(sign)
-                        .multiply(MathUtils.factorial(4 * n))
+                        .multiply(MathUtils.factorial(4 * n, parallel))
         ).divide(new BigDecimal(
                         BigInteger.valueOf(4).pow(n)
-                                .multiply(MathUtils.factorial(n)).pow(4)
+                                .multiply(MathUtils.factorial(n, parallel)).pow(4)
                 )
                 , scale, RoundingMode.HALF_UP);
 

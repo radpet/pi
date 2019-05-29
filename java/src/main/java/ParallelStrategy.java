@@ -32,7 +32,7 @@ public class ParallelStrategy extends ComputeStrategy {
         return () ->
                 IntStream.range(0, MathUtils.calculateIterations(precision))
                         .parallel()
-                        .mapToObj(i -> computeMember(i, precision + 2))
+                        .mapToObj(i -> computeMember(i, precision + 2, true))
                         .reduce(BigDecimal.ZERO, (current, sumSoFar) -> sumSoFar.add(current));
 
     }

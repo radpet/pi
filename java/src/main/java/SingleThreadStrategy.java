@@ -6,7 +6,7 @@ public class SingleThreadStrategy extends ComputeStrategy {
     @Override
     protected BigDecimal strategy(int precision) {
         return IntStream.range(0, MathUtils.calculateIterations(precision))
-                .mapToObj(i -> computeMember(i, precision + 2))
+                .mapToObj(i -> computeMember(i, precision + 2, false))
                 .reduce(BigDecimal.ZERO, (current, sumSoFar) -> sumSoFar.add(current));
     }
 
