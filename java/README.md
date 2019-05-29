@@ -19,3 +19,11 @@ To run it use `run.sh` or `java -jar build/libs/pi-bench-all.jar -mode parallel 
   Total Number of Cores:	4
 
 ```
+
+``` bench_report3.txt based on
+  Architecture:          x86_64
+  CPU(s):                32
+  Model name:            Intel(R) Xeon(R) CPU E5-2660 0 @ 2.20GHz
+
+```
+
