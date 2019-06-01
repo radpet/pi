@@ -10,15 +10,16 @@ public class MathUtilsTest {
 
     @Test
     public void testFactorialNormal() {
-        assertEquals(BigInteger.ONE, MathUtils.factorial(0,false));
-        assertEquals(BigInteger.ONE, MathUtils.factorial(1, false));
-        assertEquals(BigInteger.valueOf(120), MathUtils.factorial(5, false));
+
+        assertEquals(BigInteger.ONE, MathUtils.factorial(0));
+        assertEquals(BigInteger.ONE, MathUtils.factorial(1));
+        assertEquals(BigInteger.valueOf(120), MathUtils.factorial(5));
     }
 
     @Test
     public void testFactorialParallel() {
-        assertEquals(BigInteger.ONE, MathUtils.factorial(0,true));
-        assertEquals(BigInteger.ONE, MathUtils.factorial(1, true));
-        assertEquals(BigInteger.valueOf(120), MathUtils.factorial(5, true));
+        assertEquals(BigInteger.ONE, MathUtils.factorial(0));
+        assertEquals(BigInteger.ONE, MathUtils.factorial(1));
+        assertEquals(BigInteger.valueOf(120), MathUtils.factorial(5));
     }
 }
