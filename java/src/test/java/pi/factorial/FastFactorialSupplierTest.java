@@ -12,26 +12,31 @@ public class FastFactorialSupplierTest {
 
     @Test
     public void testWithoutParallel() {
+        //2s 403
         runTest(new DummyFactorialSupplier());
-    } //2s 403
+    }
 
     @Test
     public void testParallelismWorkStealing1() {
+        //1s 43
         runTest(new FastFactorialSupplier(Executors.newWorkStealingPool(1)));
-    } //1s 43
+    }
 
     @Test
     public void testParallelismForkJoin1() {
+        // 711ms
         runTest(new FastFactorialSupplier(new ForkJoinPool(1)));
-    } // 711ms
+    }
 
     @Test
     public void testExecutorForkJoin() {
+        //85ms
         runTest(new FastFactorialSupplier(new ForkJoinPool()));
-    } //85ms
+    }
 
     private void runTest(FactorialSupplier factorialSupplier) {
         BigInteger result = factorialSupplier.get(100000);
         assertNotNull(result);
+//        assertEquals(456574, result.toString().length());
     }
 }
