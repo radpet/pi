@@ -9,6 +9,8 @@ import pi.strategy.ForkJoinStrategy;
 import pi.strategy.ParallelStrategy;
 import pi.strategy.SingleThreadStrategy;
 
+import java.util.concurrent.ForkJoinPool;
+
 public class Pi {
 
     public static ComputeStrategy parallelCachedFactorial(int numThreads, FactorialCache factorialCache) {
@@ -16,7 +18,7 @@ public class Pi {
     }
 
     public static ComputeStrategy parallel(int numThreads) {
-        return new ParallelStrategy(numThreads, new FastFactorialSupplier());
+        return new ParallelStrategy(numThreads, new FastFactorialSupplier(SharedForkJoinPool.get(numThreads)));
     }
 
     public static ComputeStrategy single() {
@@ -28,7 +30,7 @@ public class Pi {
     }
 
     public static ComputeStrategy commonForkJoin() {
-        return new ForkJoinStrategy(new FastFactorialSupplier());
+        return new ForkJoinStrategy(new FastFactorialSupplier(ForkJoinPool.commonPool()));
     }
 
 }
