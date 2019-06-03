@@ -17,7 +17,7 @@ public class FastFactorialSupplierP1Test {
     @Benchmark
     @BenchmarkMode({Mode.AverageTime, Mode.SampleTime, Mode.SingleShotTime, Mode.Throughput, Mode.All})
     @Fork(value = 1, warmups = 1)
-    public void measureName() {
+    public void measure() {
         runTest(new FastFactorialSupplier(new ForkJoinPool(1)));
     }
 
