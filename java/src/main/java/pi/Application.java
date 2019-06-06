@@ -53,6 +53,11 @@ public class Application {
                 ComputeStrategy strategy = Pi.singleCached(factorialCache);
                 compute.accept(strategy);
             });
+        } else if ("single".equals(mode) && "dc".equals(factMode)) {
+            timer = new Timer(numReps, () -> {
+                ComputeStrategy strategy = Pi.singleDC();
+                compute.accept(strategy);
+            });
         } else if ("single".equals(mode)) {
             timer = new Timer(numReps, () -> {
                 ComputeStrategy strategy = Pi.single();
@@ -67,6 +72,11 @@ public class Application {
             timer = new Timer(numReps, () -> {
                 FactorialCache factorialCache = FactorialCache.of(precision);
                 ComputeStrategy strategy = Pi.parallelCachedFactorial(numThreads, factorialCache);
+                compute.accept(strategy);
+            });
+        } else if ("parallel".equals(mode) && "dc".equals(factMode)) {
+            timer = new Timer(numReps, () -> {
+                ComputeStrategy strategy = Pi.parallelDC(numThreads);
                 compute.accept(strategy);
             });
         } else {
